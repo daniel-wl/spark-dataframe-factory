@@ -8,8 +8,9 @@ namespace Spark.DataframeFactory.Core
     public class DataframeFactory
     {
         internal SparkSession Spark { get; set; }
+        internal int Rows { get; set; }
 
-        public DataframeFactory(SparkSession spark)
+        public DataframeFactory(SparkSession spark, int rows)
         {
             if (spark == null)
             {
@@ -17,12 +18,13 @@ namespace Spark.DataframeFactory.Core
             }
 
             Spark = spark;
+            Rows = rows;
         }
 
         public DataFrame Build()
         {
             return Build(
-                new [] { new GenericRow(new object[] { }) },
+                new GenericRow[Rows],
                 new Microsoft.Spark.Sql.Types.StructType(new StructField[] { }));
         }
 
