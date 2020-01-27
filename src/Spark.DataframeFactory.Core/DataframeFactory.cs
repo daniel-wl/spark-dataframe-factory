@@ -8,29 +8,32 @@ namespace Spark.DataframeFactory.Core
     public class DataframeFactory
     {
         internal SparkSession Spark { get; set; }
-        internal int Rows { get; set; }
+        internal StructType Schema { get; set; }
 
-        public DataframeFactory(SparkSession spark, int rows)
+        public DataframeFactory(SparkSession spark, StructType schema)
         {
             if (spark == null)
             {
                 throw new ArgumentNullException(nameof(spark));
             }
 
+            if (schema == null)
+            {
+                throw new ArgumentNullException(nameof(schema));
+            }
+
             Spark = spark;
-            Rows = rows;
+            Schema = schema;
         }
 
-        public DataFrame Build()
+        public DataFrame Build(int rows)
         {
-            return Build(
-                new GenericRow[Rows],
-                new Microsoft.Spark.Sql.Types.StructType(new StructField[] { }));
+            return Spark.CreateDataFrame(new GenericRow[rows], Schema);
         }
 
-        public DataFrame Build(IEnumerable<GenericRow> data, StructType schema)
+        public DataFrame Build(IEnumerable<GenericRow> data)
         {
-            return Spark.CreateDataFrame(data, schema);
+            return Spark.CreateDataFrame(data, Schema);
         }
     }
 }
