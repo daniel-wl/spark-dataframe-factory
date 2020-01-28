@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using FluentAssertions;
-using Microsoft.Spark.Sql;
 using Microsoft.Spark.Sql.Types;
-using Moq;
 using Xunit;
 
 namespace Spark.DataframeFactory.Core.Test
