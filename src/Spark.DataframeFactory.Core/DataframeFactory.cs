@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Spark.Sql;
 using Microsoft.Spark.Sql.Types;
 
@@ -28,12 +27,7 @@ namespace Spark.DataframeFactory.Core
 
         public DataFrame Build(int rows)
         {
-            return Spark.CreateDataFrame(new GenericRow[rows], Schema);
-        }
-
-        public DataFrame Build(IEnumerable<GenericRow> data)
-        {
-            return Spark.CreateDataFrame(data, Schema);
+            return Spark.CreateDataFrame(RowFactory.Build(rows, Schema), Schema);
         }
     }
 }

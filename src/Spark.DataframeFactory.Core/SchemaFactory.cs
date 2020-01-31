@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bogus;
 using Microsoft.Spark.Sql.Types;
 
 namespace Spark.DataframeFactory.Core
@@ -11,7 +12,7 @@ namespace Spark.DataframeFactory.Core
         {
             var schema = columnDefinitions.Select(definition =>
             {
-                return new StructField(definition.Item1, ParseDataType(definition.Item2));
+                return new StructField(definition.Item1, ParseDataType(definition.Item2), new Faker().Random.Bool());
             });
 
             return new StructType(schema);
