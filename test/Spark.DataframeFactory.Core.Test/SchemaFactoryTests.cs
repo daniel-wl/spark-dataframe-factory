@@ -33,21 +33,7 @@ namespace Spark.DataframeFactory.Core.Test
             [Fact]
             public void ReturnsCorrectColumnDefinitions()
             {
-                var dataTypes = new DataType[]
-                {
-                    new BooleanType(),
-                        new ByteType(),
-                        new BinaryType(),
-                        new ShortType(),
-                        new IntegerType(),
-                        new LongType(),
-                        new FloatType(),
-                        new DoubleType(),
-                        new StringType(),
-                        new DateType(),
-                        new TimestampType()
-                }.Select(y => y.SimpleString).ToArray();
-
+                var dataTypes = Utilities.DataTypes;
                 var columnDefinitions = new int[Faker.Random.Int(1, 100)]
                     .Select(i => new Tuple<string, string>(Faker.Random.Word(), dataTypes[Faker.Random.Int(0, dataTypes.Length - 1)]))
                     .ToList();
@@ -61,22 +47,9 @@ namespace Spark.DataframeFactory.Core.Test
             [Fact]
             public void ReturnsCorrectDataType()
             {
-                var dataTypes = new DataType[]
-                {
-                    new BooleanType(),
-                    new ByteType(),
-                    new BinaryType(),
-                    new ShortType(),
-                    new IntegerType(),
-                    new LongType(),
-                    new FloatType(),
-                    new DoubleType(),
-                    new StringType(),
-                    new DateType(),
-                    new TimestampType()
-                };
+                var dataTypes = Utilities.DataTypes;
                 var toParse = dataTypes[Faker.Random.Int(0, dataTypes.Length - 1)];
-                SchemaFactory.ParseDataType(toParse.SimpleString).Should().BeEquivalentTo(toParse);
+                SchemaFactory.ParseDataType(toParse).SimpleString.Should().BeEquivalentTo(toParse);
             }
 
             [Fact]
