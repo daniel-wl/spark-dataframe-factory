@@ -41,9 +41,9 @@ namespace Spark.DataframeFactory.Core
                 case "string":
                     return new StringType();
                 case "date":
-                    return new DateType();
+                    throw new NotSupportedException($"Spark .Net doesn't support type {stringType} yet.");
                 case "timestamp":
-                    return new TimestampType();
+                    throw new NotSupportedException($"Spark .Net doesn't support type {stringType} yet.");
                 default:
                     throw new NotSupportedException($"Mapping type {stringType} is not supported.");
             }
