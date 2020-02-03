@@ -22,7 +22,9 @@ namespace Spark.DataframeFactory.Console
         {
             SparkSession spark = SparkSession.Builder().GetOrCreate();
             var df = new Core.DataframeFactory(spark, ParseSchema(options)).Build(options.Rows);
-            df.Show();
+            df.Write()
+                .Format(options.OutputFormat.ToString().ToLower())
+                .Save(options.OutputPath);
         }
 
         public static StructType ParseSchema(Options options)
