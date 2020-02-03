@@ -15,14 +15,15 @@ namespace Spark.DataframeFactory.Console
             parser.ParseArguments<Options>(args)
                 .WithParsed(options => Run(options))
                 .WithNotParsed(error => System.Console.WriteLine(error));
-            System.Console.ReadLine();
         }
 
         public static void Run(Options options)
         {
             SparkSession spark = SparkSession.Builder().GetOrCreate();
             var df = new Core.DataframeFactory(spark, ParseSchema(options)).Build(options.Rows);
-            df.Show();
+            df.Write()
+                .Format(options.OutputFormat.ToString().ToLower())
+                .Save(options.OutputPath);
         }
 
         public static StructType ParseSchema(Options options)
