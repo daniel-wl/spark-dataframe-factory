@@ -15,7 +15,6 @@ namespace Spark.DataframeFactory.Console
             parser.ParseArguments<Options>(args)
                 .WithParsed(options => Run(options))
                 .WithNotParsed(error => System.Console.WriteLine(error));
-            System.Console.ReadLine();
         }
 
         public static void Run(Options options)
