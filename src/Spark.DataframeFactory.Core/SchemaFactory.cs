@@ -25,9 +25,9 @@ namespace Spark.DataframeFactory.Core
                 case "boolean":
                     return new BooleanType();
                 case "byte":
-                    return new ByteType();
+                    throw new NotSupportedException($"Spark .Net doesn't support type {stringType} yet.");
                 case "binary":
-                    return new BinaryType();
+                    throw new NotSupportedException($"Spark .Net doesn't support type {stringType} yet.");
                 case "short":
                     return new ShortType();
                 case "integer":
@@ -35,7 +35,7 @@ namespace Spark.DataframeFactory.Core
                 case "long":
                     return new LongType();
                 case "float":
-                    return new FloatType();
+                    throw new NotSupportedException($"Spark .Net doesn't support type {stringType} yet.");
                 case "double":
                     return new DoubleType();
                 case "string":
